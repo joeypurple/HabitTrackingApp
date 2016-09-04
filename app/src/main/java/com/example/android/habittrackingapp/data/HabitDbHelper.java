@@ -28,7 +28,7 @@ public class HabitDbHelper extends SQLiteOpenHelper {
 
 
 
-    private void displayDatabaseInfo() {
+    private Cursor displayDatabaseInfo() {
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
 
         String[] projection = {
@@ -64,6 +64,8 @@ public class HabitDbHelper extends SQLiteOpenHelper {
         // Always close the cursor when you're done reading from it. This releases all its
         // resources and makes it invalid.
         cursor.close();
+
+        return cursor;
     }
 
     private void insertHabit() {
@@ -115,7 +117,7 @@ public class HabitDbHelper extends SQLiteOpenHelper {
     }
 
 
-    public void onDelete(SQLiteDatabase db) {
+    public void deleteDatabase(SQLiteDatabase db) {
         String SQL_DELETE_HABITS_TABLE = "DROP TABLE " + HabitContract.HabitEntry.TABLE_NAME;
 
         db.execSQL(SQL_DELETE_HABITS_TABLE);
